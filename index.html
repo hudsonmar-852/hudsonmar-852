@@ -1,1 +1,189 @@
-<!DOCTYPE html><html lang="zh-HK"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hudson Mar · Landing</title><style>*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}body{background:#f5f7fb;color:#111827;padding:24px}.container{max-width:1100px;margin:auto}.hero{background:linear-gradient(135deg,#111827,#374151);padding:42px;border-radius:28px;color:#fff;margin-bottom:24px}.hero h1{font-size:2.4rem;margin-bottom:10px}.hero p{color:#d1d5db}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.card{background:#fff;border-radius:24px;padding:24px;text-decoration:none;color:#111827;box-shadow:0 8px 24px rgba(0,0,0,.08);transition:.2s}.card:hover{transform:translateY(-4px)}.icon{font-size:2rem;margin-bottom:12px}.title{font-size:1.3rem;font-weight:800;margin-bottom:8px}.desc{color:#6b7280;margin-bottom:12px}.url{font-size:.85rem;background:#f3f4f6;padding:8px 12px;border-radius:999px;display:inline-block}footer{text-align:center;color:#9ca3af;margin-top:30px}@media(max-width:768px){.hero h1{font-size:1.8rem}}</style></head><body><div class="container"><section class="hero"><h1>Hudson Mar · GitHub Landing</h1><p>集中管理所有 GitHub subsite，一按即入。</p></section><div class="grid"><a class="card" href="https://hudsonmar-852.github.io/Jeffrey/bible.html"><div class="icon">📖</div><div class="title">Bible</div><div class="desc">Bible subsite：聖經金句、解說、祝福。</div><div class="url">Bible subsite</div></a><a class="card" href="https://hudsonmar-852.github.io/Jeffrey/"><div class="icon">🏋️</div><div class="title">Jeffrey</div><div class="desc">Jeffrey’s subsite：健身、提醒、教材。</div><div class="url">Jeffrey subsite</div></a><a class="card" href="https://hudsonmar-852.github.io/prompt/"><div class="icon">🧠</div><div class="title">Prompt</div><div class="desc">Prompt library & reusable workflows.</div><div class="url">Prompt subsite</div></a><a class="card" href="https://hudsonmar-852.github.io/Grok/"><div class="icon">🎬</div><div class="title">Grok</div><div class="desc">Grok Imagine prompt & video system.</div><div class="url">Grok subsite</div></a></div><footer>Hudson Mar GitHub Landing</footer></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hudson Mar · GitHub Landing</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;--text:#111827;--muted:#6b7280;--card:#ffffff;--soft:#f3f4f6;--border:rgba(17,24,39,.08);--hero1:#111827;--hero2:#374151;--shadow:0 10px 28px rgba(0,0,0,.08);--accent:#2563eb;--green:#16a34a;--orange:#f97316;
+    }
+    body.dark{
+      --bg:#0b1020;--text:#f9fafb;--muted:#cbd5e1;--card:#111827;--soft:#1f2937;--border:rgba(255,255,255,.12);--hero1:#020617;--hero2:#1e293b;--shadow:0 14px 36px rgba(0,0,0,.35);--accent:#60a5fa;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC",sans-serif}
+    body{min-height:100vh;background:var(--bg);color:var(--text);padding:24px;line-height:1.6;transition:.25s}
+    .container{max-width:1160px;margin:auto}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.02em}
+    .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#111827,#64748b);display:grid;place-items:center;color:white;font-weight:900}
+    .toggle{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:10px 15px;cursor:pointer;box-shadow:var(--shadow);font-weight:700}
+    .hero{background:linear-gradient(135deg,var(--hero1),var(--hero2));padding:42px;border-radius:30px;color:white;margin-bottom:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;right:-90px;top:-90px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.09)}
+    .hero h1{font-size:2.5rem;margin-bottom:10px;letter-spacing:-.045em;position:relative;z-index:1}
+    .hero p{color:#d1d5db;max-width:760px;position:relative;z-index:1}
+    .stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:1}
+    .stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);padding:9px 13px;border-radius:999px;font-size:.92rem;color:#f3f4f6}
+    .toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;margin:22px 0}
+    .search{width:100%;border:1px solid var(--border);background:var(--card);color:var(--text);padding:15px 17px;border-radius:18px;box-shadow:var(--shadow);font-size:1rem;outline:none}
+    .filter{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+    .filter button{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:11px 14px;white-space:nowrap;cursor:pointer;font-weight:700}
+    .filter button.active,.filter button:hover{background:var(--text);color:var(--bg)}
+    .section-title{font-size:1.15rem;font-weight:900;margin:16px 0;color:var(--text)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:24px;padding:23px;text-decoration:none;color:var(--text);box-shadow:var(--shadow);border:1px solid var(--border);transition:.2s;display:flex;flex-direction:column;gap:12px;min-height:220px}
+    .card:hover{transform:translateY(-5px);border-color:var(--accent)}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .icon{font-size:2rem}.title{font-size:1.32rem;font-weight:900;letter-spacing:-.02em}.desc{color:var(--muted);flex:1}.meta{display:flex;gap:6px;flex-wrap:wrap}.badge{font-size:.78rem;font-weight:800;border-radius:999px;padding:5px 9px;background:var(--soft);color:var(--muted)}.badge.recent{background:rgba(37,99,235,.12);color:var(--accent)}.badge.protected{background:rgba(249,115,22,.14);color:var(--orange)}.badge.public{background:rgba(22,163,74,.12);color:var(--green)}
+    .url{font-size:.85rem;background:var(--soft);padding:8px 11px;border-radius:12px;color:var(--muted);word-break:break-word}
+    .empty{display:none;text-align:center;color:var(--muted);padding:30px;background:var(--card);border-radius:24px;border:1px solid var(--border)}
+    footer{text-align:center;color:var(--muted);margin-top:34px;font-size:14px}
+    @media(max-width:768px){body{padding:17px}.hero{padding:30px 22px}.hero h1{font-size:1.85rem}.toolbar{grid-template-columns:1fr}.card{min-height:auto}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand"><div class="avatar">HM</div><div>Hudson Mar · GitHub</div></div>
+      <button class="toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+
+    <section class="hero">
+      <h1>Hudson Mar · Landing Page</h1>
+      <p>Upper-level GitHub Pages landing page for all repos and subsites under <strong>hudsonmar-852</strong>. Search, click, and open each project quickly.</p>
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <div class="toolbar">
+      <input class="search" id="searchInput" type="text" placeholder="Search repo or subsite: Bible, Jeffrey, Prompt, Grok..." />
+      <div class="filter" id="filters"></div>
+    </div>
+
+    <div class="section-title">Available Repos & Subsites</div>
+    <main class="grid" id="siteGrid"></main>
+    <div class="empty" id="emptyState">No matching repo / subsite found.</div>
+
+    <footer>Hudson Mar GitHub Landing · Auto-build friendly structure · Last updated 2026-06-07</footer>
+  </div>
+
+  <script>
+    const sites = [
+      {
+        title:'Bible',
+        subtitle:'Bible subsite',
+        icon:'📖',
+        url:'https://hudsonmar-852.github.io/Jeffrey/bible.html',
+        repo:'hudsonmar-852/Jeffrey',
+        category:'Faith',
+        status:'Public',
+        recent:true,
+        protected:false,
+        desc:'聖經金句、簡單解說、祝福短訊，可直接 Copy 分享。'
+      },
+      {
+        title:'Jeffrey',
+        subtitle:'Jeffrey’s subsite',
+        icon:'🏋️',
+        url:'https://hudsonmar-852.github.io/Jeffrey/',
+        repo:'hudsonmar-852/Jeffrey',
+        category:'Fitness',
+        status:'Public',
+        recent:true,
+        protected:false,
+        desc:'健身教練每日關心短訊、Copy tracking、健身教材入口。'
+      },
+      {
+        title:'Prompt',
+        subtitle:'Prompt subsite',
+        icon:'🧠',
+        url:'https://hudsonmar-852.github.io/prompt/',
+        repo:'hudsonmar-852/prompt',
+        category:'AI Prompt',
+        status:'Private repo / Public page if enabled',
+        recent:false,
+        protected:true,
+        desc:'Prompt library、AI 創作流程、可重用 prompt system。'
+      },
+      {
+        title:'Grok',
+        subtitle:'Grok subsite',
+        icon:'🎬',
+        url:'https://hudsonmar-852.github.io/Grok/',
+        repo:'hudsonmar-852/Grok',
+        category:'Video',
+        status:'Public',
+        recent:false,
+        protected:true,
+        desc:'Grok Imagine 影片 prompt、場景模板、短片創作素材。'
+      },
+      {
+        title:'Root Landing',
+        subtitle:'Main account landing page',
+        icon:'🏠',
+        url:'https://hudsonmar-852.github.io/',
+        repo:'hudsonmar-852/hudsonmar-852',
+        category:'Landing',
+        status:'Public',
+        recent:true,
+        protected:false,
+        desc:'Upper-level homepage listing all repos and subsite pages.'
+      }
+    ];
+
+    const grid = document.getElementById('siteGrid');
+    const emptyState = document.getElementById('emptyState');
+    const searchInput = document.getElementById('searchInput');
+    const filters = document.getElementById('filters');
+    const stats = document.getElementById('stats');
+    let activeCategory = 'All';
+
+    function init(){
+      const cats = ['All', ...new Set(sites.map(s=>s.category))];
+      filters.innerHTML = cats.map(cat => `<button class="${cat==='All'?'active':''}" onclick="setCategory('${cat}', this)">${cat}</button>`).join('');
+      stats.innerHTML = `<span class="stat">${sites.length} sites</span><span class="stat">${new Set(sites.map(s=>s.repo)).size} repos</span><span class="stat">${sites.filter(s=>s.recent).length} recent</span><span class="stat">${sites.filter(s=>s.protected).length} protected/private indicators</span>`;
+      const savedTheme = localStorage.getItem('hmLandingTheme');
+      if(savedTheme === 'dark') document.body.classList.add('dark');
+      updateToggleText();
+      render();
+    }
+
+    function setCategory(cat, btn){
+      activeCategory = cat;
+      document.querySelectorAll('.filter button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+
+    function render(){
+      const q = searchInput.value.toLowerCase().trim();
+      const data = sites.filter(s => {
+        const matchesCategory = activeCategory === 'All' || s.category === activeCategory;
+        const text = `${s.title} ${s.subtitle} ${s.repo} ${s.category} ${s.desc} ${s.status}`.toLowerCase();
+        return matchesCategory && text.includes(q);
+      });
+      grid.innerHTML = data.map(site => card(site)).join('');
+      emptyState.style.display = data.length ? 'none' : 'block';
+    }
+
+    function card(site){
+      return `<a class="card" href="${site.url}" target="_blank" rel="noopener">
+        <div class="card-head"><div><div class="icon">${site.icon}</div><div class="title">${site.title}</div></div><div class="meta">${site.recent?'<span class="badge recent">Recent</span>':''}${site.protected?'<span class="badge protected">Protected</span>':'<span class="badge public">Public</span>'}</div></div>
+        <div class="desc"><strong>${site.subtitle}</strong><br>${site.desc}</div>
+        <div class="meta"><span class="badge">${site.category}</span><span class="badge">${site.status}</span></div>
+        <div class="url">${site.repo}<br>${site.url}</div>
+      </a>`;
+    }
+
+    function toggleTheme(){
+      document.body.classList.toggle('dark');
+      localStorage.setItem('hmLandingTheme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      updateToggleText();
+    }
+    function updateToggleText(){
+      document.querySelector('.toggle').innerText = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+    }
+    searchInput.addEventListener('input', render);
+    init();
+  </script>
+</body>
+</html>
